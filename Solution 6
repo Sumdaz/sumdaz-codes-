@@ -1,0 +1,54 @@
+#1 Write a Python program to rearrange positive and negative numbers in a given list using Lambda functions, so that all positive numbers appear before negative numbers. For example, given [-1, 2, -3, 5, 7, 8, 9, -10], function rearranges positive and negative numbers as follows: [2, 5, 7, 8, 9, -10, -3, -1].
+num_list = [-1, 2, -3, 5, 7, 8, 9, -10]
+print(num_list)
+rearrange_num = sorted(num_list, key = lambda i: 0 if i == 0 else -1/i)
+print(rearrange_num)
+
+#2 Write a Python function to extract the nth element from a given list of tuples using lambda.
+
+def extract_nth_element(score_list, n):
+    score_sheet_cards= list(map (lambda x:(x[n]), score_list))
+    print(score_sheet_cards)
+players = [('Auba', 19, 5, 1), ('Sterling', 16, 4, 2), ('Kai', 21, 7, 0), ('Mount', 11, 3, 1), ('Broja', 13, 0, 0), ('Gallagher',7, 7, 2), ('James', 10, 8, 3), ('Jorginho', 5, 8, 2), ('Kovacic', 7, 6, 6), ('Pulisic', 11, 5, 0), ('Cucurella', 3, 2, 1), ('Chilwel', 4, 4, 2), ('Thiago', 5, 3, 0), ('RLC', 3, 2, 4), ('Ziyech', 4, 2, 0), ('Carney', 7, 0, 0), ('Koulibaly', 6, 1, 1), ('Fofana', 2, 2, 4), ('Trevoh', 3, 2, 4), ('Kante', 8, 9, 2)] 
+print ("Original list:")
+print(players)
+n = 0
+print("\nExtract nth element ( n =",n,") showing names of the players from the said list of tuples:")
+print(extract_nth_element(players, n))
+n = 1
+print("\nExtract nth element ( n =",n,") showing goals scored by the players in a season from the said list of tuples:")
+print(extract_nth_element(players, n))
+n = 2
+print("\nExtract nth element ( n =",n,") showing yellow cards for the players in a season from the said list of tuples:")
+print(extract_nth_element(players, n))
+n = 3
+print("\nExtract nth element ( n =",n,") showing red cards for the players in a season from the said list of tuples:")
+print(extract_nth_element(players, n))
+
+
+#3 Write a Python function to filter out odd elements of a list, leaving only even list elements. Note: Please do not use built-in 'filter' Python function.
+
+num = list(range(1, 101, 3))
+print(num)
+# filter numbers odd numbers from num
+even = []
+for i in num:
+    if i%2==0:
+        even.append(i)
+        
+print(even)
+
+#4 Write a list comprehension that prints a list of the cubes of the numbers 1 through a number input by the user.
+
+num = int(input("Please, enter a number: "))
+num_list = list(range(1, num+1))
+cube = []
+for i in num_list:
+    cube.append(i*i*i)
+print(cube)
+
+#5 Write a Python function get_all_vowels that takes in a string and uses a list comprehension to return all the vowels in the string.
+
+text = input("Please, enter text: ")
+get_all_vowels =[char for char in text if char.lower() in 'aeiou']
+print(get_all_vowels)
