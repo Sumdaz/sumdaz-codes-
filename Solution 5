@@ -1,0 +1,91 @@
+# Deck of cards/User computer hand
+import random
+userIn = True
+computerIn = True
+deck = [2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10,2,3,4,5,6,7,8,9,10,'J','Q','K','A','J','Q','K','A','J','Q','K','A','J','Q','K','A']
+
+userHand = []
+computerHand = []
+
+# deal the cards
+def dealcard(turn):
+    card = random.choice(deck)
+    turn.append(card)
+    deck.remove(card)
+
+            
+# calculate the total of each hand
+def total(turn):
+    total = 0
+    face = ['J','K','Q']
+    for card in turn:
+        if card in range(1, 11):
+            total += card
+        elif card in face:
+            total += 10
+        else:
+            if total > 11:
+                total += 1
+            else:
+                total += 11
+    return total
+    
+    
+# check for winner
+def revealcomputerHand():
+    if len(computerHand) == 2:
+        return computerHand[0]
+    elif len(computerHand) > 2:
+        return computerHand[0], computerHand[1]
+        
+        
+# game loop
+def game():
+    for _ in range (2):
+        dealcard(computerHand)
+        dealcard(userHand)
+while userIn or computerIn:
+    print(f'Computer had {revealcomputerHand()} and X')
+    print(f'You have {userHand} for a total of {total(userHand)}')
+    if userIn:
+        Stand_or_Hit = input  ("1: Stay\n2: Hit\n")
+    if total(computerHand)> 16:
+        computerIn = False
+    else:
+        dealcard(computerHand)
+    if Stand_or_Hit == '1':
+        userIn = False
+    else:
+        dealcard(userHand)
+    if total(userHand) >= 21:
+        break
+    elif total(computerHand)>= 21:
+        break
+if total(userHand) == 21:
+        print(f'\nYou have {total(userHand)} for a total of 21 and the computer has {computerHand} for a total of {total(computerHand)}')
+        print('Blackjack! You win!')
+elif total(computerHand) == 21:
+        print(f'\nYou have {total(userHand)} for a total of 21 and the computer has {computerHand} for a total of {total(computerHand)}')
+        print('Blackjack! Computer wins!')
+elif total(userHand)> 21:
+        print(f'\nYou have {total(userHand)} for a total of 21 and the computer has {computerHand} for a total of {total(computerHand)}')
+        print('You bust! Computer wins!')
+elif total(computerHand) > 21:
+        print(f'\nYou have {total(userHand)} for a total of 21 and the computer has {computerHand} for a total of {total(computerHand)}')
+        print('Computer busts! You win!')
+elif 21 - total(computerHand) < 21 - total(userHand):
+        print(f'\nYou have {total(userHand)} for a total of 21 and the computer has {computerHand} for a total of {total(computerHand)}')
+        print('Computer wins!')
+elif 21 - total(computerHand) > 21 - total(userHand):
+        print(f'\nYou have {total(userHand)} for a total of 21 and the computer has {computerHand} for a total of {total(computerHand)}')
+        print('You win!')
+        
+
+# play again
+def play_again(game):
+    new_game = input('Do you want to play again? Y for yes and N for no: ' ).lower()
+    if new_game == 'y':
+        game()
+    else:
+        print ('Bye!')
+play_again(game)
