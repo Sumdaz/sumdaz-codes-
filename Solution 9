@@ -1,0 +1,79 @@
+# 1. Write a Python program to create a pandas DataFrame that represents your scores on all previous assignments. Please make sure to clearly label your rows and columns.
+
+import pandas as pd
+import numpy as np
+my_scoresheet= {
+"Assignment" : ["assignment_1", "assignment_2", "assignment_3", "assignment_4", "assignment_5", "assignment_6" , "assignment_7", "assignment_8"], "Score": [10, 9, 9, 10, 9, 8, 10, 10]}
+frame = pd.DataFrame(my_scoresheet, columns = ["Assignment", "Score"], index=[1, 2, 3, 4, 5, 6, 7, 8])
+print(frame)
+print("Shape: ", frame.shape)
+print("Number of rows: ", frame.shape[0])
+print("Number of columns: ", frame.shape[1])
+
+#For the following problems, read in this csv data file:
+val= "https://www.shadowbounce.com/data/MusicArtists_100K.csv"
+music_artists_df = pd.read_csv(val)
+print(music_artists_df)
+
+# 2. See the first and last 10 entries.
+print(music_artists_df.head(10))
+print(music_artists_df.tail(10))
+
+# 3. Get and display the number of records and columns.
+
+print("Shape: ", music_artists_df.shape)
+print("Number of rows: ", music_artists_df.shape[0])
+print("Number of columns: ", music_artists_df.shape[1])
+
+#4 Display all the column names and DataFrame indices.
+all_columns = music_artists_df.columns
+print("\nColumns of DataFrame:\n", all_columns, "\nIndices:\n", music_artists_df.index)
+
+#5 Display data types of all columns.
+print(music_artists_df.dtypes)
+
+#6 Display how many different artists are there and what is the most frequent artist in the dataset.
+print("\nUnique artist mb: \n", music_artists_df["artist_mb"].unique())
+print("\nNumber of unique artist mb: \n", music_artists_df['artist_mb'].nunique())
+
+#7 Display information about categorical columns and summarize their properties
+
+#display information about categorical columns
+cat = music_artists_df.select_dtypes(exclude ='number')
+print(cat)
+
+
+# summarize their properties
+print(cat.info())
+
+#8. Display information about numerical columns and summarize their properties.
+
+# display information about numerical columns
+
+numeric = music_artists_df.select_dtypes(include = 'number')
+print(numeric)
+
+# summarizd their properties
+print(numeric.info())
+
+#9 Identify all the columns with missing entries. For each column, display the number of entries missing.
+
+#identify missing values
+missing_values = music_artists_df.isna()
+print(missing_values)
+
+#display number of missing entries
+
+num_missing_enteries = music_artists_df.isna().sum()
+print(num_missing_enteries)
+
+#10. Extract records for all artists whose names start with a letter 'b'.
+
+firstname_b = music_artists_df.artist_mb.str.startswith('B')
+print(firstname_b)
+
+
+#11. Add a new column to the DataFrame called 'is_USA_based. For each artist record, add a column with either 'Yes' or 'No' as its contents, based on their country of origin.
+
+music_artists_df['is_USA_based'] = np.where(music_artists_df['country_mb']== 'United States', 'Yes', 'No')
+print(music_artists_df)
