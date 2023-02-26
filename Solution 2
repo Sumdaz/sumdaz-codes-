@@ -1,0 +1,57 @@
+#1 Write a Python program to calculate sum of digits of any number input by the user
+from math import floor
+num = int(input("Enter a positive integer number: "))
+total = 0
+while num>0:
+    digit = num % 10
+    total = total  + digit
+    num = num//10
+print ("sum = ", total)
+
+#2 Write a Python program to filter the positive numbers from a list, leaving only non-positive numbers in the list.
+
+list = [1, -4, 5, -10, -12, 4, -7, 18]
+print (list)
+for i in list:
+    if i >= 0:
+        list.remove(i)
+print("non_positive_numbers are: ", list)
+
+#3 Write a Python program to remove and print every third number from a list of numbers until the list becomes empty
+
+nums = [2, 3, 4, 5, 17, 16, 20, 234, 61, 0]
+print (nums)
+position = 3-1
+len_list = len(nums)
+index = 0
+while len_list > 0:
+    index = (position + index) % len_list
+    remove_num = nums.pop(index)
+    print(remove_num)
+    len_list -= 1
+print(nums)
+
+
+#4 Given a list of numbers and a number k, write a Python program to check whether the sum of any two numbers from the list is equal to k or not. For example, given [1, 4, 11, 5] and k = 15, return true since 11 + 4 is 15
+
+list_of_numbers = [6, 13, 7, 4, 9, 5, 8, 1]
+
+#sum of any two numbers to be k = 15
+k = 15
+for x in list_of_numbers:
+    for y in list_of_numbers:
+        if x + y == k:    
+            print (True)
+        else:
+            print(False)
+            
+#5 Write a Python program that receives a (potentially long) text input, converts the string to a list, and prints all the words and their frequencies.
+
+guest_str = input("Please enter string:  ")
+word_list = guest_str.split( )
+dict = {}
+for i in word_list:
+    if i not in dict.keys():
+        dict[i] = 0
+    dict[i] = dict[i] + 1
+print(dict)
