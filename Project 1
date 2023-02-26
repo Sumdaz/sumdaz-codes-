@@ -1,0 +1,248 @@
+#1. Get the most frequent element in a given flat (simple) list of numbers. If there are ties, return all such elements.
+
+from collections import Counter
+
+my_list = [(3, 2, 13), (4, 2, 3, 5, 7, 6, 12), (1, 9, 3, 2, 4)]
+flattened = [ ]
+for tup in my_list:
+    for item in tup:
+        flattened.append(item)
+print(flattened)
+counts = Counter(flattened)
+most_elem = counts.most_common()[0][1]
+most_freq_elem = [value for value, count in counts.most_common() if count == most_elem]
+print("\n", most_freq_elem)
+
+
+
+#2. Take an arbitrary nested tuple as an input and flatten it into a simple (flat) list.
+
+import collections
+
+nested_tuple =((3, 5, 1), (2, (8, 7, 3)),(0, 4, 9), (5,(4,(10, 12, 21))))
+
+def flatten(nested_tuple):
+    if isinstance(nested_tuple, collections.Iterable):
+        return [a for i in nested_tuple for a in flatten(i)]
+    else:
+        return [nested_tuple]
+
+
+#3. Split a given flat list into a user-specified number of sub-lists, if possible. If not possible, then display the message to the user.
+
+flat_list = flatten(nested_tuple)
+print(flat_list)
+n = int(input("Please, enter the number of elements for each list: "))
+for i in range(0, len(flat_list), n):
+    list_of_lists = flat_list [i:i + n]
+    if n > len(flat_list):
+        print("It is not possible")
+    else:
+        print ("\n", list_of_lists)
+        
+#4. Given a function and a simple list, determine if a given function returns True for every element in a list.
+
+def every_element(list, f_n = lambda x: x):
+  return all(map(f_n, list))
+
+# if any element from the list does not meet the condition the function returns
+print(every_element([-2, -1, -5], lambda x: x < 0))
+print(every_element([-2, -1, -5], lambda x: x > 0))
+print(every_element([-2, -1, -5], lambda x: x == 0))
+
+#5. Find out if there are duplicate values in any given (even a nested) list.
+def flatten(g):
+    g_list = []
+    for i in g:
+        if isinstance(i, list): 
+            g_list.extend(flatten(i))
+        else: 
+            g_list.append(i)
+    return g_list
+
+def dup():
+    k = flatten(["Jame,","Cucu", "Trevoh", "Mount", "RLC", "Pulisic", ["Silva","Azpi", "Azpi", "RLC"]])
+#calling set function
+    if len(k) != len(set(k)):
+        return True
+    else:
+        return False
+print(dup())
+
+
+#6. Create a NumPy array that contains a 'big X' printed by a chosen character on the screen. Ask use to input the height of the shape, as well as a 'brush' character, then use the 'brush' character to print a 'big X' of the specified height. Make sure that you check for allowed shape heights! For example, given height of 5 and a brush character '#', your program prints the following NumPy array: 
+
+import numpy as np
+char = input("Please, enter the character of your choice: ")
+height_z = int(input("Please, enter a number: "))
+z = np.array((height_z,height_z), dtype = str)
+col = height_z
+row = 0
+for row in range (height_z):
+    for col in range (height_z):
+        if row == 0 and col ==height_z:
+            print(char, end=" ")
+            row = height_z + 1
+            col = height_z - 1
+        elif row==col:
+            print(char, end = " ")
+        else:
+            print(end= " ")
+    print()
+
+#7. Check if the dimensions of two given NumPy arrays are same. Your code must work for arrays of any dimension.
+import numpy as np
+def check_dimensions(first_array,second_array):
+    try:
+        first_array + second_array
+    except ValueError:
+        return "Both array have a different dimension"
+    else:
+        return "Both array have the same dimension"
+first_array = np.arange(15).reshape(3,5)
+second_array = np.arange(15).reshape(3,5)
+print(check_dimensions(first_array, second_array))
+first_array = np.arange(24).reshape(6,4)
+second_array = np.arange(24).reshape(6,4)
+print(check_dimensions(first_array, second_array))
+
+#8. Get all possible 2-dimensional diagonals of any given 3-dimensional NumPy array.
+
+import numpy as np
+# using range of array
+a = np.arange(4 * 5* 6).reshape(4, 5, 6)
+  
+print("_3D_array:\n", a)
+
+diagonal_a = np.diagonal(a, axis1 = 1,axis2 = 2)
+  
+print("_2D_diagonal_array:\n", diagonal_a)
+
+
+#9. Create a 16x16 NumPy array that represents a digit '5'. Plot the digit on the screen.
+import numpy as np
+z = np.zeros((16, 16), dtype = int)
+z[0:] = 5
+print("\n", z)
+
+#10. Get the total number of non-zero elements in a numerical 3-dimensional array.
+import numpy as np
+z = np.array([2, 1, 0, 8, 0, 3, 0, 0, 5, 6, 12, 23,11, 14, 7, 2, 8, 4, 3, 2, 1, 3, 4, 9])
+z_b = z.reshape((2, 3, 4))
+np.count_nonzero(z_b >0)
+print("\n", z_b)
+print("\n", np.count_nonzero(z_b>0))
+
+#11. Determine if a specific key and a value combination exists in a dictionary.
+
+d = {"milk" : 10, "milo" : 50, "soap" : 65, "sausage" : 100, "phone" : 120, "pen" : 1, "paper" : 5, "pencil" : 4, "fan" : 35}
+# if the items pass to print exist it will return true, else false
+print("\n", ('milo', 50) in d.items())
+
+#12. Get a list of all the words in a given string consisting of all the words whose lengths are even numbers.
+
+words = input("Please, enter your words: ")
+word_split = words.split(" ")
+for i in word_split:
+    if len(i) % 2 == 0:
+        print("\n", i)
+        
+#13. Count the numbers that are greater than the previous number on the list, given an arbitrary list of integers.
+a = [2, 3, 3, 5, 1, 7, 9, 3, 10]
+my_result = [ ]
+for idx in range(1, len(a)):
+     if a[idx -1] < a[idx]:
+         my_result.append(True)
+     else:
+         my_result.append(False)
+print("List of boolean values:\n",my_result)     
+print (sum(my_result))
+        
+#14. Find out if a given string is a palindrome. A palindrome is a string that reads the same backward as forward.
+string = input("Please, enter string: ") 
+ 
+#Declare an empty string variable   
+rev = " " 
+for i in string:
+    rev = i + rev
+print("Reversed string : ", rev)
+ 
+if(string ==rev):
+    print("The string is a palindrome.") 
+else:
+    print("The string is not a palindrome.")
+    
+#15. Have the user input their birth date, then compute the users age in only minutes and seconds.
+
+# calculate age in years
+
+from datetime import date
+birthyear= int( input('Please, enter birth year:'))
+birthmonth = int(input('Please, enter birth month: '))
+birthday = int(input('Please, enter burth day: '))
+today = date.today()
+age = today.year - birthyear-((today.month, today.day)<(birthmonth, birthday))
+print(age)
+
+#convert the age to minutes and seconds
+seconds = age *(60*60*24*365)
+minutes = age * (60* 24*365)
+print (seconds)
+print(minutes)
+
+#16. Retrieve the items of a given pandas Series object not present in another given Series object.
+import pandas as pd 
+# Creating 2 pandas Series 
+
+n1 = pd.Series([29, 3, 5, 2, 6, 61, 11, 7]) 
+n2 = pd.Series([11, 4, 8, 7, 3, 14, 15, 12])
+print("Series1:\n", n1)
+print("\nSeries2:\n", n2)  
+
+# Using Bitwise NOT operator along with pandas.isin() 
+print("\nItems of n1 not in n2:") 
+my_items = n1[~n1.isin(n2)] 
+print(my_items)
+
+#17. Have the user input the temperature in Celsius degrees, then display the equivalent temperature in Fahrenheit degrees (F = 9/5 * C + 32).
+
+degree = float(input ("Enter the temperature: "))
+conversion = float(round((9/5)*degree + 32.0))
+print("Temperature is", conversion, "in Fahrenheit")
+
+#18. Insert a column at a given specific index in a given pandas DataFrame. Initially, new column will contain a single default value for its contents.
+
+import pandas as pd 
+
+df = pd.DataFrame({"Players": ['Silva', 'Kepa', 'James', 'Mount', 'Azpi', 'Auba', 'Sterling', 'Broja', 'Cucu', 'Mendy'], 
+                   "Salary": ['120k', '150k', '220k', '150k', '135k', '190k', '300k', '90k', '110k', '120k'], 
+                   "Contracts": ['5years', '3years', '3years', '2years', '4years', '1year', '2years','3years', '7years', '2years'], 
+                   "Jersey": [6, 1, 24, 19, 28, 9, 17,18, 32, 16]}) 
+print("Original DataFrame :\n", df) 
+adjusted_df = df.assign(Nationality = 'default') 
+print("\n", adjusted_df)
+
+#19. Find out if a year entered by the user is a leap year.
+
+check_for_leapyear = int(input("Please, enter a year: "))   
+if((check_for_leapyear % 400 == 0) or  (check_for_leapyear % 100 != 0) and  (check_for_leapyear % 4 == 0)):   
+    print(check_for_leapyear, " is a leap Year");
+else:
+    print (check_for_leapyear, "is not a leap Year")  
+    
+    
+#20. Sort the letters of any given string into a list where letters are sorted in the descending alphabetical order.
+
+my_name = "IHEUKWUMERE"
+my_namelist = [ ]
+k = len(my_name)
+for i in range(0, k):
+    my_namelist.append(my_name[i])
+for i in range(0, k):
+    for j in range(0, k):
+        if my_namelist[i] < my_namelist[j]:
+            my_namelist[i], my_namelist[j] = my_namelist[j], my_namelist[i]
+j = " "
+for i in range (0, k):
+    j = j + my_namelist[i]
+print(j)
