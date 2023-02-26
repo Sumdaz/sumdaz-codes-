@@ -1,0 +1,69 @@
+#1 Write a function to remove an item from a tuple, creating a new tuple without the specified element.
+
+my_items = ('deodorant', 'comb','perfume', 'cream','brush', 'bottle')
+convtd_tuple = list(my_items)
+convtd_tuple.remove('bottle')
+new_tuple = tuple(convtd_tuple)
+print(new_tuple)
+
+#2 Write a function to compute element-wise sum of given three tuples. For example, given these tuples: (2, 3, 4, 5), (3, 5, 2, 1), and (2, 2, 3, 1); element-wise sum of the said tuples is (7, 10, 9, 7).
+
+# create a variable for all the tuples
+
+tup1 = (2, 3, 4, 5)
+tup2 = (3, 5, 2, 1)
+tup3 = (2, 2, 3, 1)
+
+#  create an empty list for conversion of the tuples to a list
+list_tups = list()
+for i in range(4):
+    sum = tup1[i] + tup2 [i] + tup3[i]
+    list_tups.append(sum)
+list_tups = tuple(list_tups)
+print(list_tups)
+
+#3 Write a function to invert a given dictionary with non-unique hashable values, so that (unique) values become keys, and the keys become values. 
+
+from collections import defaultdict
+my_shopping= {
+'sugar' : 20,
+'milk' : 30,
+'chips' : 5,
+'cheese' : 6,
+'pen' : 3,
+'coffee' : 4,
+}
+my_shopping_list = defaultdict(list)
+for key, value in my_shopping.items():
+    my_shopping_list[value].append(key)
+print(my_shopping)
+print(dict(my_shopping_list))
+
+
+#4 Write a function to count and display the frequency of values in any given dictionary.
+
+from collections import Counter
+chelsea_goals = {
+'kante' : 2,
+'jorginho' : 1,
+'silva' : 2,
+'auba' : 2,
+'sterling' : 3,
+'kepa' : 1,
+'james' : 3,
+'carney' : 0,
+'kovacic' : 1,
+'azpi' : 0,
+'chiwel' : 4,
+'havertz' : 4,
+'rlc' : 5,
+'mount' : 3,
+'pulisic' : 0,
+'cucu' : 1,
+'mendy' : 0,
+'broja' : 5,
+'koulibaly' : 2,
+}
+goals_scored_so_far = Counter(chelsea_goals.values())
+print(chelsea_goals)
+print(goals_scored_so_far)
